@@ -6,6 +6,10 @@ module.exports = function (paths) {
         module: {
             rules: [
                 {
+                    test: /\.html$/,
+                    loader: "html-loader"
+                },
+                {
                     test: /\.scss$/,
                     include: paths,
                     use: ExtractTextPlugin.extract({

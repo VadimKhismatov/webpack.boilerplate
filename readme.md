@@ -1,10 +1,6 @@
 # My simple webpack boilerplate...
 Trying to move from **gulp** to **webpack** =)<br>
 
-To add img tag to html use:<br>
-**`<img src=<%=require("../../img/")%> alt="">`**<br>
-url have to point to the image placed in SRC folder
-
 ## Some link to external libs: 
 
 **SLICK CAROUSEL:**<br> 
