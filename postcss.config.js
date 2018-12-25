@@ -1,9 +1,7 @@
 module.exports = {
-    plugins: [
-        require('autoprefixer')({
-            browsers: [
-                "last 8 versions"
-            ]
-        })
-    ]
+  plugins: [
+    require('autoprefixer')({
+      browsers: ['last 4 versions']
+    })
+  ]
 };
