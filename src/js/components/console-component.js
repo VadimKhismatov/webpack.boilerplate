@@ -1,3 +1,3 @@
-export default function (text) {
-    console.log(`console-component:${text}`);
-};
+export default function(text) {
+  console.log(`console-component:${text}`);
+}

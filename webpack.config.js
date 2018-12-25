@@ -8,7 +8,7 @@ require('babel-register');
 
 const paths = {
   src: path.join(__dirname + '/src'),
-  build: path.join(__dirname + '/dist')
+  build: path.join(__dirname + '/dist'),
 };
 
 // Webpack Configuration
@@ -17,32 +17,32 @@ const config = {
   stats: 'minimal',
   // Entry
   entry: {
-    index: paths.src + '/pages/index/index.js'
+    index: paths.src + '/pages/index/index.js',
   },
   // Output
   output: {
     path: paths.build,
-    filename: 'js/[name].js'
+    filename: 'js/[name].js',
   },
   // Loaders
   module: {
     rules: [
       {
         test: /\.html$/,
-        loader: 'html-loader'
+        loader: 'html-loader',
       },
       {
         test: /\.(eot|woff|woff2)$/,
         loader: 'file-loader',
         options: {
-          name: 'fonts/[name].[ext]'
-        }
+          name: 'fonts/[name].[ext]',
+        },
       },
       // JavaScript/JSX Files
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: ['babel-loader']
+        use: ['babel-loader'],
       },
       // CSS Files
       {
@@ -51,16 +51,16 @@ const config = {
         use: ExtractTextPlugin.extract({
           publicPath: '../',
           fallback: 'style-loader',
-          use: ['css-loader', 'postcss-loader', 'sass-loader']
-        })
+          use: ['css-loader', 'postcss-loader', 'sass-loader'],
+        }),
       },
       {
         test: /\.css$/,
         //include: paths,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          use: ['css-loader', 'postcss-loader']
-        })
+          use: ['css-loader', 'postcss-loader'],
+        }),
       },
 
       {
@@ -69,12 +69,12 @@ const config = {
           {
             loader: 'file-loader',
             options: {
-              name: 'img/[name].[ext]'
-            }
-          }
-        ]
-      }
-    ]
+              name: 'img/[name].[ext]',
+            },
+          },
+        ],
+      },
+    ],
   },
   optimization: {
     splitChunks: {
@@ -82,10 +82,10 @@ const config = {
         commons: {
           name: 'commons',
           chunks: 'initial',
-          minChunks: 2
-        }
-      }
-    }
+          minChunks: 2,
+        },
+      },
+    },
   },
   // Plugins
   plugins: [
@@ -94,28 +94,28 @@ const config = {
       filename: 'index.html',
       chunks: ['index', 'common'],
       template: paths.src + '/pages/index/index.html',
-      hash: true
+      hash: true,
     }),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production')
+      'process.env.NODE_ENV': JSON.stringify('production'),
     }),
     new SpritesmithPlugin({
       src: {
         cwd: path.resolve(paths.src + '/sprite'),
-        glob: '*.png'
+        glob: '*.png',
       },
       target: {
         image: path.resolve(paths.src + '/img/sprite.png'),
-        css: path.resolve(__dirname, 'src/scss/base/sprite.scss')
+        css: path.resolve(__dirname, 'src/scss/base/sprite.scss'),
       },
       /* customTemplates: {
           'scss.template.mustache': './scss.template.mustache'
       }, */
       apiOptions: {
-        cssImageRef: '../../img/sprite.png'
-      }
-    })
-  ]
+        cssImageRef: '../../img/sprite.png',
+      },
+    }),
+  ],
 };
 // Exports
 module.exports = config;
