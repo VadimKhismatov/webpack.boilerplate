@@ -1,7 +1,0 @@
-{
-  // Fit code within this line limit
-  "prettier.printWidth": 120,
-  "prettier.trailingComma": "all",
-  "prettier.singleQuote": true,
-  "prettier.eslintIntegration": true
-}
