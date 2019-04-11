@@ -7,8 +7,7 @@
     "start": "cross-env Env=development Build=false webpack-dev-server  --inline --hot --progress",
     "build:dev": "rimraf dist && cross-env Env=development Build=true webpack",
     "build:prod": "rimraf dist && cross-env Env=production Build=true webpack",
-    "serv": "static dist --indexFile home/index.html",
-    "test": "cross-env Env=development node ./test.js"
+    "serv": "static dist --indexFile home/index.html"
   },
   "author": "",
   "license": "ISC",
