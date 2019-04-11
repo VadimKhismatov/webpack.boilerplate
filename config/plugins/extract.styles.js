@@ -6,7 +6,7 @@ module.exports = () => {
   const plugin = new MiniCssExtractPlugin({
     // Options similar to the same options in webpackOptions.output
     // both options are optional
-    filename: "css/[name].css",
+    filename: "assets/css/[name].css",
     chunkFilename: "[id].css"
   });
   return plugin;

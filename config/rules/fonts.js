@@ -5,7 +5,7 @@ module.exports = () => {
     test: /\.(eot|woff|woff2)$/,
     loader: 'file-loader',
     options: {
-      name: 'fonts/[name].[ext]',
+      name: 'assets/fonts/[name].[ext]',
     },
   }
 }

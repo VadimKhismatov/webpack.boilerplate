@@ -20,7 +20,7 @@ module.exports = (dirname) => {
     pages.entries[_page] = pageUrl;
 
     const htmlOption = new HtmlWebpackPlugin({
-      filename: `${_page}.html`,
+      filename: _page === 'index' ? `home/index.html` :`${_page}/index.html`,
       chunks: [`${_page}`, 'common'],
       template: path.resolve(path.join(dirname, pagesSrcUrl, _page, 'index.html')),
       hash: true,

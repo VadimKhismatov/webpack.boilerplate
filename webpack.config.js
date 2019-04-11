@@ -26,7 +26,8 @@ const common = {
   // Output
   output: {
     path: paths.build,
-    filename: 'js/[name].bundle.js',
+    filename: 'assets/js/[name].bundle.js',
+    publicPath: process.env.Build === 'true' ? '../' : '/',
   },
   optimization: {
     splitChunks: {
@@ -39,10 +40,7 @@ const common = {
       },
     },
   },
-  plugins: [
-    ...pages.htmlOptions
-  ]
-
+  plugins: [...pages.htmlOptions],
 };
 
 let config = null;
@@ -51,7 +49,7 @@ if (!isProd) {
   config = merge(common, _dev);
 } else {
   config = merge(common, _prod);
-};
+}
 
 // Exports
 module.exports = config;

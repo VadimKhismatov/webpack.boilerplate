@@ -48,7 +48,8 @@ module.exports = (paths, dirname) => {
     stats: 'verbose',
     devServer: {
       port: 8080,
-      hot: true
+      hot: true,
+      index: 'home/index.html'
     },
     // Loaders
     module: {
