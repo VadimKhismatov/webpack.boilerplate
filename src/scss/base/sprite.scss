@@ -9,11 +9,33 @@
 //
 // At the bottom of this section, we provide information about the spritesheet itself
 // $spritesheet: width height image $spritesheet-sprites;
-$spritesheet-width: 0px;
-$spritesheet-height: 0px;
+$calendar-with-a-clock-time-tools-name: 'calendar-with-a-clock-time-tools';
+$calendar-with-a-clock-time-tools-x: 35px;
+$calendar-with-a-clock-time-tools-y: 0px;
+$calendar-with-a-clock-time-tools-offset-x: -35px;
+$calendar-with-a-clock-time-tools-offset-y: 0px;
+$calendar-with-a-clock-time-tools-width: 20px;
+$calendar-with-a-clock-time-tools-height: 20px;
+$calendar-with-a-clock-time-tools-total-width: 55px;
+$calendar-with-a-clock-time-tools-total-height: 35px;
+$calendar-with-a-clock-time-tools-image: '../../img/sprite.png';
+$calendar-with-a-clock-time-tools: (35px, 0px, -35px, 0px, 20px, 20px, 55px, 35px, '../../img/sprite.png', 'calendar-with-a-clock-time-tools', );
+$vk-name: 'vk';
+$vk-x: 0px;
+$vk-y: 0px;
+$vk-offset-x: 0px;
+$vk-offset-y: 0px;
+$vk-width: 35px;
+$vk-height: 35px;
+$vk-total-width: 55px;
+$vk-total-height: 35px;
+$vk-image: '../../img/sprite.png';
+$vk: (0px, 0px, 0px, 0px, 35px, 35px, 55px, 35px, '../../img/sprite.png', 'vk', );
+$spritesheet-width: 55px;
+$spritesheet-height: 35px;
 $spritesheet-image: '../../img/sprite.png';
-$spritesheet-sprites: ();
-$spritesheet: (0px, 0px, '../../img/sprite.png', $spritesheet-sprites, );
+$spritesheet-sprites: ($calendar-with-a-clock-time-tools, $vk, );
+$spritesheet: (55px, 35px, '../../img/sprite.png', $spritesheet-sprites, );
 
 // The provided mixins are intended to be used with the array-like variables
 //

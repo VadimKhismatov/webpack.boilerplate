@@ -1,80 +1,33 @@
 // Imports: Dependencies
 const path = require('path');
-const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const SpritesmithPlugin = require('webpack-spritesmith');
-require('babel-register');
+const merge = require('webpack-merge');
+const loadPages = require('./config/utils/load.pages');
+const devConfig = require('./config/dev/index');
+const prodConfig = require('./config/prod/index');
 
 const paths = {
-  src: path.join(__dirname + '/src'),
-  build: path.join(__dirname + '/dist'),
+  src: path.resolve(path.join(__dirname, '/src')),
+  build: path.resolve(path.join(__dirname, '/dist')),
 };
 
+console.log('Env: ', process.env.Env);
+const isProd = process.env.Env === 'production' ? true : false;
+
+// get URL for all pages.
+const pages = loadPages(__dirname);
+
+const _dev = devConfig(paths, __dirname);
+const _prod = prodConfig(paths, __dirname);
+
 // Webpack Configuration
-const config = {
-  devtool: 'source-map',
-  stats: 'minimal',
+const common = {
   // Entry
-  entry: {
-    index: paths.src + '/pages/index/index.js',
-  },
+  entry: pages.entries,
   // Output
   output: {
     path: paths.build,
-    filename: 'js/[name].js',
-  },
-  // Loaders
-  module: {
-    rules: [
-      {
-        test: /\.html$/,
-        loader: 'html-loader',
-      },
-      {
-        test: /\.(eot|woff|woff2)$/,
-        loader: 'file-loader',
-        options: {
-          name: 'fonts/[name].[ext]',
-        },
-      },
-      // JavaScript/JSX Files
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: ['babel-loader'],
-      },
-      // CSS Files
-      {
-        test: /\.scss$/,
-        //include: paths,
-        use: ExtractTextPlugin.extract({
-          publicPath: '../',
-          fallback: 'style-loader',
-          use: ['css-loader', 'postcss-loader', 'sass-loader'],
-        }),
-      },
-      {
-        test: /\.css$/,
-        //include: paths,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: ['css-loader', 'postcss-loader'],
-        }),
-      },
-
-      {
-        test: /\.(gif|png|jpe?g|svg)$/i,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: 'img/[name].[ext]',
-            },
-          },
-        ],
-      },
-    ],
+    filename: 'assets/js/[name].bundle.js',
+    publicPath: process.env.Build === 'true' ? '../' : '/',
   },
   optimization: {
     splitChunks: {
@@ -87,35 +40,16 @@ const config = {
       },
     },
   },
-  // Plugins
-  plugins: [
-    new ExtractTextPlugin('./css/[name].css'),
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      chunks: ['index', 'common'],
-      template: paths.src + '/pages/index/index.html',
-      hash: true,
-    }),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production'),
-    }),
-    new SpritesmithPlugin({
-      src: {
-        cwd: path.resolve(paths.src + '/sprite'),
-        glob: '*.png',
-      },
-      target: {
-        image: path.resolve(paths.src + '/img/sprite.png'),
-        css: path.resolve(__dirname, 'src/scss/base/sprite.scss'),
-      },
-      /* customTemplates: {
-          'scss.template.mustache': './scss.template.mustache'
-      }, */
-      apiOptions: {
-        cssImageRef: '../../img/sprite.png',
-      },
-    }),
-  ],
+  plugins: [...pages.htmlOptions],
 };
+
+let config = null;
+
+if (!isProd) {
+  config = merge(common, _dev);
+} else {
+  config = merge(common, _prod);
+}
+
 // Exports
 module.exports = config;

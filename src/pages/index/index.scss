@@ -1,7 +1,9 @@
-@import "../../scss/base/helpers.scss";
-@import "../../scss/base/main.scss";
+@import '../../scss/base/helpers.scss';
+@import '../../scss/base/main.scss';
+@import '../../scss/base/sprite.scss';
 
-h1{
-    display: flex;
-    color: blue;
+h1 {
+  display: flex;
+  color: blue;
+  @include sprite($vk);
 }
